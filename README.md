@@ -260,23 +260,11 @@ Important note:
 * it is currently a **reference UI**, not yet wired into the backend in this repository snapshot
 * screenshots can be added later for documentation or presentation
 
-### Add frontend screenshots here
 
-Recommended folder:
+![Admin Panel](frontend/screenshots/admin.png)
+![Admin Panel](frontend/screenshots/user.png)
+![Admin Panel](frontend/screenshots/sidebar.png)
 
-```text
-frontend/screenshots/
-├── admin-panel.png
-├── user-home.png
-├── add-more-dialog.png
-└── retrieval-results.png
-```
-
-Then reference them in this README like this:
-
-```md
-![Admin Panel](frontend/screenshots/admin-panel.png)
-```
 
 ---
 
