@@ -1,0 +1,8 @@
+{
+  "IMAGE_RETRIEVE": 1,
+  "MMR": 0,
+  "RETRIEVED_IMAGES_CHUNKS": 2,
+  "QUERY": "when was Battle of thermopylae fought?",
+  "MULTI_QUERY" :1, 
+  "RERANKING":1
+}

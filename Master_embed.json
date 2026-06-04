@@ -1,0 +1,36 @@
+{
+  "CATEGORY": "1-Hostel",
+  "OPTION": 2,
+  "IMAGE_OPTION": 1,
+  "PAGES_TO_PROCESS": [
+    "Battle_of_Thermopylae", "Narendra Modi" 
+  ],
+  "HEADERS": {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+  },
+  "REMOVE_CLASSES": [
+    "infobox",
+    "sidebar",
+    "navbox",
+    "vertical-navbox",
+    "portable-infobox",
+    "reflist",
+    "toc",
+    "hatnote",
+    "mw-editsection",
+    "mw-references-wrap"
+  ],
+  "NOISE_SUBSTRINGS": [
+    "reference",
+    "see also",
+    "further reading",
+    "external link",
+    "bibliography",
+    "notes",
+    "sources",
+    "citation"
+  ],
+  "MAX_IMAGE_RETRIEVAL": 5,
+  "MAX_CHUNKS": 10,
+  "MIN_CHUNKS": 3
+}
