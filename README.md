@@ -1,4 +1,8 @@
-# BHU-LM
+![Python](https://img.shields.io/badge/Python-3.11-blue)
+![RAG](https://img.shields.io/badge/RAG-Hybrid-green)
+![Ollama](https://img.shields.io/badge/Ollama-Local%20Models-orange)
+![MediaWiki](https://img.shields.io/badge/Data-MediaWiki-red)
+# BHU-LM: Hybrid RAG Framework for MediaWiki Knowledge Bases
 
 BHU-LM is a modular Retrieval-Augmented Generation (RAG) system built for MediaWiki-style knowledge bases. It supports category-based ingestion, HTML cleaning, table-aware text chunking, versioned vector storage, hybrid retrieval, reranking, and optional multimodal processing.
 
@@ -39,7 +43,10 @@ repo-root/
 ├── RAG_retrieve.py
 ├── frontend/
 │   ├── ...
-│   └── screenshots/
+│   ├── frontend/screenshots/
+│      ├── admin.png
+│      ├── user.png
+│      └── sidebar.png
 └── README.md
 ```
 
@@ -261,9 +268,16 @@ Important note:
 * screenshots can be added later for documentation or presentation
 
 
-![Admin Panel](frontend/screenshots/admin.png)
-![Admin Panel](frontend/screenshots/user.png)
-![Admin Panel](frontend/screenshots/sidebar.png)
+## Frontend Preview
+
+### Admin Dashboard
+![Admin Dashboard](frontend/screenshots/admin.png)
+
+### User Interface
+![User Interface](frontend/screenshots/user.png)
+
+### Category Navigation
+![Category Navigation](frontend/screenshots/sidebar.png)
 
 
 ---
