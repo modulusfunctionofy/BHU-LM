@@ -1,0 +1,170 @@
+%-------------------------
+% Resume in Latex
+% Author : Jake Gutierrez
+% Based off of: https://github.com/sb2nov/resume
+% License : MIT
+%------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{lmodern}
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\input{glyphtounicode}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+\pdfgentounicode=1
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubSubheading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small #2} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=*, itemsep=2pt, topsep=2pt]}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+\begin{document}
+
+\begin{center}
+    \textbf{\Huge \scshape Aryan Mauryakant} \\ \vspace{1pt}
+    \small Mobile: +91-9202110620 $|$ \includegraphics[width=0.015\textwidth]{email.png} \href{mailto:modulusfunctionofy@gmail.com}{\small{modulusfunctionofy@gmail.com}} $|$ \\ \includegraphics[width=0.019\textwidth]{linkedin.png}
+    \href{https://www.linkedin.com/in/aryanmk1/}{\underline{LinkedIn: aryanmk1}} $|$ \includegraphics[width=0.019\textwidth]{github.png}
+    \href{https://github.com/modulusfunctionofy}{\underline{Github: modulusfunctionofy}}
+\end{center}
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {VIT Bhopal University}{Bhopal, India}
+      {Computer Science and Engineering; CGPA: 9.17}{Sep. 2024 -- June 2028}
+    \resumeSubheading
+      {Sunbeam English School Bhagwanpur}{Varanasi, India}
+      {Intermediate - CBSE; Percentage: 89.6\%}{Mar. 2022 -- May 2023}
+    \resumeSubheading
+      {Holy Cross School}{Ballia, India}
+      {Matriculation - ICSE; Percentage: 92.6\%}{May 2020 -- July 2021}
+  \resumeSubHeadingListEnd
+
+%-----------EXPERIENCE-----------
+\section{Experience}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {IIT BHU Intern}{IIT (BHU), Varanasi, India}
+      {RAG Pipeline Developer}{May 2025 -- Jul. 2025}
+      \resumeItemListStart
+        \resumeItem{Built a private MediaWiki-based RAG pipeline for category-wise ingestion, HTML cleaning, semantic chunking, embedding, and retrieval over institutional content.}
+        \resumeItem{Implemented versioned ChromaDB storage, tracker-based deduplication, and hybrid dense/BM25 retrieval with configurable MMR and reranking.}
+        \resumeItem{Designed a backend-driven JSON configuration flow to make the pipeline modular, extendable, and easy to operate for future document sets.}
+      \resumeItemListEnd
+  \resumeSubHeadingListEnd
+
+%-----------PROJECTS-----------
+\section{Projects}
+    \resumeSubHeadingListStart
+      \resumeProjectHeading
+          {\textbf{Automated Answer Sheet Evaluator} $|$ \emph{Python, OCR, NLP, Sentence Transformers}}{\underline{\href{https://github.com/modulusfunctionofy/DuplexRetrievalUniMarkupSystem}{Github}}}
+          \resumeItemListStart
+            \resumeItem{Built an OCR + NLP pipeline to extract text from PDF/image submissions and compare answers against a reference solution using semantic similarity.}
+            \resumeItem{Applied PaddleOCR, NLTK preprocessing, Sentence Transformers, cosine similarity, and OpenPyXL for batch scoring and result export.}
+          \resumeItemListEnd
+      \resumeProjectHeading
+          {\textbf{Campus Course and Records Manager} $|$ \emph{Java, OOP, NIO, CLI}}{\underline{\href{https://github.com/modulusfunctionofy/campus-course-records-manager-24BAI10142}{Github}}}
+          \resumeItemListStart
+            \resumeItem{Developed a modular Java CLI application for managing student, course, and enrollment records with structured package design.}
+            \resumeItem{Implemented file handling with Java NIO and applied OOP principles with maintainable service-layer architecture.}
+          \resumeItemListEnd
+    \resumeSubHeadingListEnd
+
+%-----------ACHIEVEMENTS-----------
+\section{Achievements}
+  \begin{itemize}[leftmargin=*, itemsep=1pt, topsep=2pt]
+    \resumeItem{\textbf{Finalist} at \textbf{Code-wreck} hackathon (VIT, 2025), ranked in the top 10 out of 200+ teams.}
+    \resumeItem{Rated Pupil at Codeforces with a max rating of \textbf{1267} in \textbf{7 contests}.}
+    \resumeItem{Secured \textbf{Global Rank 742} in GeeksforGeeks Weekly Coding Contest 171.}
+    \resumeItem{Earned a \textbf{Silver Medal (Top 2\%)} in NPTEL ``Programming with Generative AI'' and ranked \textbf{59th} among 44k+ participants.}
+  \end{itemize}
+
+%-----------PROGRAMMING SKILLS-----------
+\section{Technical Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Languages}{: C/C++, Java, Python, SQL, JavaScript, HTML, CSS} \\
+     \textbf{Frameworks}{: React, Node.js, Flask, Bootstrap} \\
+     \textbf{Developer Tools}{: Git, Google Cloud Platform, VS Code, BlueJ, Anaconda, Render} \\
+     \textbf{Libraries}{: pandas, NumPy, Matplotlib, scikit-learn} \\
+     \textbf{Academic Coursework}{: Data Structures and Algorithms, DBMS, Object Oriented Programming, Operating System} \\
+     \textbf{Soft Skills}{: Problem-solving, Time management, Team collaboration, Leadership, Effective communication}
+    }}
+ \end{itemize}
+
+\section{Position of Responsibility}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Bit-Coding Club Core Member} \\
+     {Setting problems, teaching algorithms, and mentoring 200+ students.}
+    }}
+ \end{itemize}
+
+\end{document}

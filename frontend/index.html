@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BHU-LM | Welcome</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .page-wrapper {
+            text-align: center;
+            width: 100%;
+            max-width: 700px;
+            padding: 20px;
+        }
+
+        .app-header {
+            margin-bottom: 40px;
+        }
+
+        .app-header h1 {
+            font-size: 2.5rem;
+            color: #1a237e;
+            letter-spacing: 2px;
+        }
+
+        .app-header p {
+            color: #555;
+            font-size: 0.95rem;
+            margin-top: 6px;
+        }
+
+        .divider {
+            width: 60px;
+            height: 3px;
+            background-color: #1a237e;
+            margin: 12px auto;
+        }
+
+        .login-options {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .login-card {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 35px 30px;
+            width: 250px;
+            cursor: pointer;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            display: block;
+        }
+
+        .login-card:hover {
+            border-color: #1a237e;
+            box-shadow: 0 3px 10px rgba(26, 35, 126, 0.15);
+        }
+
+        .login-card .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 14px;
+        }
+
+        .login-card h2 {
+            font-size: 1.2rem;
+            color: #1a237e;
+            margin-bottom: 8px;
+        }
+
+        .login-card p {
+            font-size: 0.82rem;
+            color: #777;
+            line-height: 1.5;
+        }
+
+        .footer-note {
+            margin-top: 40px;
+            font-size: 0.78rem;
+            color: #aaa;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <div class="app-header">
+            <h1>BHU-LM</h1>
+            <div class="divider"></div>
+            <p>Banaras Hindu University &mdash; Language Model RAG System</p>
+        </div>
+
+        <div class="login-options">
+            <a class="login-card" href="login.html?role=user">
+                <div class="card-icon">&#128100;</div>
+                <h2>User Login</h2>
+                <p>Query the knowledge base, browse categories and retrieve document chunks.</p>
+            </a>
+            <a class="login-card" href="login.html?role=admin">
+                <div class="card-icon">&#9881;</div>
+                <h2>Admin Login</h2>
+                <p>Manage categories, upload documents, configure processing settings.</p>
+            </a>
+        </div>
+
+        <div class="footer-note">
+            BHU-LM v1.0 &nbsp;&bull;&nbsp; Internal Use Only
+        </div>
+    </div>
+</body>
+</html>

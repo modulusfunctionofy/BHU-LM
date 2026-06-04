@@ -1,0 +1,337 @@
+/* ===========================================
+   BHU-LM  |  admin.css
+   Admin-specific styles
+   =========================================== */
+
+/* Admin content wrapper */
+.admin-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-width: 0;
+}
+
+/* Category detail container */
+.cat-detail {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+
+.cat-detail-header {
+    padding: 10px 16px;
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.cat-detail-name {
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--primary);
+}
+
+/* 3-column layout */
+.cat-detail-body {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+}
+
+/* Settings panel (left column) */
+.settings-panel {
+    width: 190px;
+    flex-shrink: 0;
+    border-right: 1px solid var(--border);
+    background: #fafafa;
+}
+
+.settings-panel .panel-body {
+    padding: 0;
+}
+
+.setting-row {
+    padding: 8px 12px;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 0.82rem;
+}
+
+.setting-row .setting-key {
+    color: var(--text-muted);
+    font-size: 0.74rem;
+    margin-bottom: 2px;
+}
+
+.setting-row .setting-val {
+    color: #222;
+    font-weight: bold;
+}
+
+/* Docs + DB panel (middle column) */
+.docs-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-width: 0;
+}
+
+.docs-section {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+    max-height: 35%;
+    overflow-y: auto;
+}
+
+.db-section {
+    flex: 1;
+    padding: 10px 14px;
+    overflow-y: auto;
+    border-bottom: 1px solid var(--border);
+}
+
+.section-title {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.doc-entry {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.84rem;
+    color: #333;
+    padding: 4px 0;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.doc-entry .doc-arrow {
+    color: var(--primary);
+    font-size: 0.8rem;
+}
+
+.doc-entry .doc-name {
+    flex: 1;
+}
+
+.db-entry {
+    font-size: 0.78rem;
+    color: #666;
+    padding: 3px 0;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.db-entry .db-key {
+    color: #aaa;
+    flex-shrink: 0;
+    width: 70px;
+}
+
+.db-entry .db-path {
+    font-family: monospace;
+    font-size: 0.73rem;
+    color: #555;
+    word-break: break-all;
+}
+
+.docs-actions {
+    padding: 12px 14px;
+    border-top: 1px solid var(--border);
+    background: #fff;
+    flex-shrink: 0;
+}
+
+/* Admin image panel (right column) */
+.admin-img-panel {
+    width: 160px;
+    flex-shrink: 0;
+    border-left: 1px solid var(--border);
+    background: #fafafa;
+}
+
+.admin-img-panel .panel-header {
+    background: #f0f0f0;
+    border-bottom: 1px solid var(--border);
+}
+
+#admin-img-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.admin-thumb {
+    width: 100%;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 3px;
+    border: 1px solid #e0e0e0;
+    background: #e8eaf6;
+}
+
+.admin-thumb-label {
+    font-size: 0.68rem;
+    color: #aaa;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Category add button */
+.cat-add-btn {
+    padding: 10px 12px;
+    border-top: 1px solid var(--border);
+    margin-top: auto;
+}
+
+.cat-add-btn button {
+    width: 100%;
+    padding: 7px 0;
+    background: var(--primary-light);
+    color: var(--primary);
+    border: 1px solid #c5cae9;
+    border-radius: 4px;
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.cat-add-btn button:hover {
+    background: #c5cae9;
+}
+
+/* Lock warning */
+.lock-warning {
+    margin-top: 6px;
+    font-size: 0.78rem;
+    color: var(--warning);
+    background: #fff8e1;
+    border: 1px solid #ffe082;
+    border-radius: 3px;
+    padding: 5px 8px;
+}
+
+.lock-warning.locked {
+    color: var(--danger);
+    background: #ffebee;
+    border-color: #ef9a9a;
+}
+
+/* Larger modal for add more forms */
+.modal-lg {
+    max-width: 620px;
+}
+
+/* Category sidebar layout fix */
+.cat-sidebar {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Empty state in doc/db sections */
+.docs-section .cat-empty,
+.db-section .cat-empty {
+    padding: 12px 8px;
+    font-size: 0.78rem;
+    color: #bbb;
+    text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .admin-img-panel {
+        display: none;
+    }
+}
+
+@media (max-width: 700px) {
+    .settings-panel {
+        width: 140px;
+    }
+    
+    .cat-sidebar {
+        width: 130px;
+    }
+}
+/* =========================
+   category delete button
+========================= */
+
+.cat-item-row{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:8px;
+}
+
+.cat-item-btn{
+    flex:1;
+}
+
+.cat-delete-btn{
+    width:32px;
+    height:32px;
+    border:none;
+    border-radius:10px;
+    background:#f3f3f3;
+    color:#777;
+    cursor:pointer;
+    transition:0.18s;
+    font-size:15px;
+}
+
+.cat-delete-btn:hover{
+    background:#ffe5e5;
+    color:#d60000;
+}
+
+/* =========================
+   processing lock note
+========================= */
+
+.lock-note{
+    margin-top:10px;
+    padding:10px 12px;
+    border-radius:12px;
+    background:#f5f5f5;
+    border:1px solid #e1e1e1;
+    color:#444;
+    font-size:14px;
+    line-height:1.45;
+}
+
+.lock-note strong{
+    font-weight:700;
+}
+
+/* =========================
+   disabled processing UI
+========================= */
+
+.processing-locked{
+    opacity:0.55;
+    pointer-events:none;
+    filter:grayscale(0.2);
+}
+
+/* optional smoother look */
+
+.radio-group.processing-locked label{
+    cursor:not-allowed;
+}

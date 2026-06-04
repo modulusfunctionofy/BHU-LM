@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BHU-LM | Documentation</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Inline styles for docs page */
+        body {
+            overflow: auto;
+            height: auto;
+        }
+
+        .docs-page {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 30px 20px 60px;
+        }
+
+        .docs-header {
+            margin-bottom: 40px;
+        }
+
+        .docs-header .back-link {
+            display: inline-block;
+            font-size: 0.85rem;
+            color: var(--primary);
+            text-decoration: none;
+            margin-bottom: 12px;
+        }
+
+        .docs-header .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .docs-header h1 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .docs-header p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .docs-header .docs-actions {
+            margin-top: 16px;
+        }
+
+        .docs-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .doc-topic {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            padding: 20px 24px;
+            scroll-margin-top: 20px;
+        }
+
+        .doc-topic-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .doc-topic-title {
+            font-size: 1.3rem;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .doc-topic-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .doc-topic-content {
+            color: #333;
+            font-size: 0.9rem;
+            line-height: 1.7;
+            white-space: pre-wrap;
+        }
+
+        .doc-topic-content strong {
+            color: var(--primary);
+        }
+
+        .doc-topic-content code {
+            background: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.85rem;
+            font-family: monospace;
+        }
+
+        .add-topic-modal .modal-body textarea {
+            min-height: 200px;
+            font-family: inherit;
+        }
+    </style>
+</head>
+<body>
+
+<div class="docs-page">
+    
+    <div class="docs-header">
+        <a href="javascript:history.back()" class="back-link">&#8592; Back</a>
+        <h1>BHU-LM Documentation</h1>
+        <p>Reference guide for RAG pipeline settings and options</p>
+        <div class="docs-actions">
+            <button class="btn btn-primary btn-sm" onclick="openAddTopicModal()">&#10010; Add Topic</button>
+        </div>
+    </div>
+
+    <div class="docs-list" id="docs-list">
+        <!-- Topics rendered by JS -->
+    </div>
+
+</div>
+
+<!-- ADD/EDIT TOPIC MODAL -->
+<div class="modal-overlay add-topic-modal" id="topic-modal">
+    <div class="modal-box modal-lg">
+        <div class="modal-header">
+            <h3 id="topic-modal-title">Add Documentation Topic</h3>
+            <button class="modal-close" onclick="closeTopicModal()">&#10005;</button>
+        </div>
+        <div class="modal-body">
+            <input type="hidden" id="topic-edit-id">
+            
+            <div class="form-row">
+                <label>Topic Title</label>
+                <input type="text" id="topic-title" placeholder="e.g., MMR — Maximal Marginal Relevance">
+            </div>
+
+            <div class="form-row">
+                <label>URL Slug <span class="label-hint">(for anchor links like #mmr)</span></label>
+                <input type="text" id="topic-slug" placeholder="e.g., mmr">
+            </div>
+
+            <div class="form-row">
+                <label>Content</label>
+                <textarea id="topic-content" rows="12" placeholder="Write the documentation content here..."></textarea>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" onclick="closeTopicModal()">Cancel</button>
+            <button class="btn btn-primary" onclick="saveTopic()">Save Topic</button>
+        </div>
+    </div>
+</div>
+
+<script src="js/docs.js"></script>
+</body>
+</html>

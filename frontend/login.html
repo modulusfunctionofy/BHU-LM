@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BHU-LM | Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-wrapper {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 40px 36px;
+            width: 100%;
+            max-width: 380px;
+        }
+
+        .login-wrapper .back-link {
+            display: inline-block;
+            font-size: 0.82rem;
+            color: #1a237e;
+            text-decoration: none;
+            margin-bottom: 24px;
+        }
+
+        .login-wrapper .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .login-header {
+            margin-bottom: 28px;
+        }
+
+        .login-header h1 {
+            font-size: 1.6rem;
+            color: #1a237e;
+        }
+
+        .role-badge {
+            display: inline-block;
+            margin-top: 6px;
+            background: #e8eaf6;
+            color: #1a237e;
+            font-size: 0.75rem;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .login-header p {
+            margin-top: 8px;
+            font-size: 0.85rem;
+            color: #777;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            color: #333;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 9px 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus {
+            border-color: #1a237e;
+        }
+
+        .error-msg {
+            display: none;
+            background: #ffebee;
+            border: 1px solid #ef9a9a;
+            color: #c62828;
+            font-size: 0.82rem;
+            padding: 8px 12px;
+            border-radius: 4px;
+            margin-bottom: 16px;
+        }
+
+        .error-msg.show {
+            display: block;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 10px;
+            background-color: #1a237e;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn-login:hover {
+            background-color: #283593;
+        }
+
+        .demo-hint {
+            margin-top: 20px;
+            font-size: 0.78rem;
+            color: #aaa;
+            text-align: center;
+            border-top: 1px solid #eee;
+            padding-top: 14px;
+        }
+
+        .demo-hint span {
+            color: #1a237e;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-wrapper">
+        <a class="back-link" href="index.html">&#8592; Back</a>
+
+        <div class="login-header">
+            <h1>BHU-LM</h1>
+            <div class="role-badge" id="role-badge">User</div>
+            <p id="role-desc">Sign in to access the knowledge base.</p>
+        </div>
+
+        <div class="error-msg" id="error-msg">
+            Incorrect username or password. Please try again.
+        </div>
+
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" placeholder="Enter your username" autocomplete="off" />
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Enter your password" />
+        </div>
+
+        <button class="btn-login" id="btn-login" onclick="doLogin()">Sign In</button>
+
+        <div class="demo-hint">
+            Demo &mdash; User: <span>user / user123</span> &nbsp;|&nbsp; Admin: <span>admin / admin123</span>
+        </div>
+    </div>
+
+    <script>
+        // Read role from URL param
+        const params = new URLSearchParams(window.location.search);
+        const role = params.get('role') || 'user';
+
+        const badge = document.getElementById('role-badge');
+        const desc  = document.getElementById('role-desc');
+
+        if (role === 'admin') {
+            badge.textContent = 'Admin';
+            desc.textContent  = 'Sign in to manage categories, documents and settings.';
+            document.title    = 'BHU-LM | Admin Login';
+        } else {
+            badge.textContent = 'User';
+            desc.textContent  = 'Sign in to access the knowledge base.';
+            document.title    = 'BHU-LM | User Login';
+        }
+
+        // Allow Enter key to submit
+        document.getElementById('password').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') doLogin();
+        });
+
+        // Demo credentials — replace with real backend call later
+        const CREDENTIALS = {
+            user:  { username: 'user',  password: 'user123',  redirect: 'user.html'  },
+            admin: { username: 'admin', password: 'admin123', redirect: 'admin.html' }
+        };
+
+        function doLogin() {
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            const errorEl  = document.getElementById('error-msg');
+
+            const creds = CREDENTIALS[role];
+
+            if (username === creds.username && password === creds.password) {
+                // Save session info to localStorage
+                localStorage.setItem('bhu_role',     role);
+                localStorage.setItem('bhu_username', username);
+                localStorage.setItem('bhu_loggedin', '1');
+
+                // Redirect to the right page
+                window.location.href = creds.redirect;
+            } else {
+                errorEl.classList.add('show');
+                document.getElementById('password').value = '';
+                document.getElementById('password').focus();
+            }
+        }
+    </script>
+</body>
+</html>

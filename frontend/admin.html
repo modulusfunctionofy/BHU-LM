@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BHU-LM | Admin</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+<!-- AUTH GUARD -->
+<script>
+    if (!localStorage.getItem('bhu_loggedin') || localStorage.getItem('bhu_role') !== 'admin') {
+        window.location.href = 'index.html';
+    }
+</script>
+
+<!-- TOPBAR -->
+<div class="topbar">
+    <button class="hamburger" id="hamburger-btn" title="Menu">&#9776;</button>
+    <div class="app-title">
+        BHU-LM
+        <span>Admin</span>
+    </div>
+    <div class="topbar-right">
+        <span class="username-label" id="topbar-username"></span>
+        <button class="btn-logout" onclick="doLogout()">Logout</button>
+    </div>
+</div>
+
+<!-- TAB BAR -->
+<div class="tabbar">
+    <div class="tab active" id="tab-mediawiki" onclick="switchTab('mediawiki')">&#128196; Mediawiki</div>
+    <div class="tab" id="tab-pdfdoc" onclick="switchTab('pdfdoc')">&#128209; PDF Doc</div>
+</div>
+
+<!-- SIDEBAR OVERLAY -->
+<div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
+
+<!-- SIDEBAR DRAWER -->
+<div class="sidebar" id="sidebar">
+    <div class="sidebar-head">
+        <span class="sidebar-title">BHU-LM Admin</span>
+        <button class="sidebar-close" onclick="closeSidebar()">&#10005;</button>
+    </div>
+
+    <div class="sidebar-section-label">Admin</div>
+    <div class="sidebar-item" onclick="openNewCatModal()">
+        <span class="item-icon">&#10010;</span> New Category
+    </div>
+
+    <div class="sidebar-section-label">Content</div>
+    <a class="sidebar-item" href="docs.html" target="_blank">
+        <span class="item-icon">&#128221;</span> Edit Documentation
+    </a>
+
+    <div class="sidebar-section-label">Account</div>
+    <div class="sidebar-item" onclick="alert('Account settings coming soon.')">
+        <span class="item-icon">&#128100;</span> My Account
+    </div>
+
+    <hr class="sidebar-divider">
+
+    <div class="sidebar-bottom">
+        <a class="sidebar-item" href="docs.html" target="_blank">
+            <span class="item-icon">&#10067;</span> Help &amp; Docs
+        </a>
+        <div class="sidebar-item" onclick="doLogout()">
+            <span class="item-icon">&#8594;</span> Logout
+        </div>
+    </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="main-layout">
+
+    <!-- CATEGORY SIDEBAR (always visible) -->
+    <div class="cat-sidebar">
+        <div class="cat-header" id="cat-header-label">Categories</div>
+        <div id="cat-list">
+
+        <div class="cat-item-row">
+            <button class="cat-item-btn active">
+                1-Hostel
+            </button>
+            <button class="cat-delete-btn" title="Delete category">
+                &#10005;
+            </button>
+        </div>
+
+        <!-- Categories populated by JS -->
+
+    </div>
+        <div class="cat-add-btn">
+            <button onclick="openNewCatModal()">&#10010; New Category</button>
+        </div>
+    </div>
+
+    <!-- ADMIN CONTENT AREA -->
+    <div class="admin-content">
+
+        <!-- Empty state (no category selected) -->
+        <div class="empty-state" id="admin-empty">
+            <div class="empty-icon">&#128193;</div>
+            <p>Select a category from the left to manage documents and settings.</p>
+            <p class="text-small text-muted">Or create a new category using the "+ New Category" button.</p>
+        </div>
+
+        <!-- Category detail view -->
+        <div class="cat-detail hidden" id="cat-detail">
+
+            <!-- Category header -->
+            <div class="cat-detail-header">
+                <span id="cat-detail-name" class="cat-detail-name"></span>
+                <span id="cat-lock-badge"></span>
+            </div>
+
+            <!-- 3-column layout: Settings | Docs+DB | Images -->
+            <div class="cat-detail-body">
+
+                <!-- Col 1: Settings panel (read-only) -->
+                <div class="settings-panel panel">
+                    <div class="panel-header">Settings</div>
+                    <div class="panel-body" id="settings-panel-body">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Col 2: Documents & Database -->
+                <div class="docs-panel">
+
+                    <!-- Documents section -->
+                    <div class="docs-section">
+                        <div class="section-title">Documents</div>
+                        <div id="docs-list">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Database section -->
+                    <div class="db-section">
+                        <div class="section-title">Database</div>
+                        <div id="db-info">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="docs-actions">
+                        <button class="btn btn-primary" onclick="openAddMoreModal()">
+                            &#10010; Add More Documents
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Col 3: Image previews -->
+                <div class="admin-img-panel panel">
+                    <div class="panel-header">Images</div>
+                    <div id="admin-img-body">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- NEW CATEGORY MODAL -->
+<div class="modal-overlay" id="new-cat-modal">
+    <div class="modal-box">
+        <div class="modal-header">
+            <h3>New Category</h3>
+            <button class="modal-close" onclick="closeModal('new-cat-modal')">&#10005;</button>
+        </div>
+        <div class="modal-body">
+            <div class="form-row">
+                <label>Category Name</label>
+                <input type="text" id="new-cat-name" placeholder="e.g., 1-Hostel, 2-Academics">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" onclick="closeModal('new-cat-modal')">Cancel</button>
+            <button class="btn btn-primary" onclick="createCategory()">Create</button>
+        </div>
+    </div>
+</div>
+
+<!-- ADD MORE MODAL - MEDIAWIKI -->
+<div class="modal-overlay" id="addmore-mw-modal">
+    <div class="modal-box modal-lg">
+        <div class="modal-header">
+            <h3>Add Documents — <span id="addmore-mw-catname"></span> (Mediawiki)</h3>
+            <button class="modal-close" onclick="closeModal('addmore-mw-modal')">&#10005;</button>
+        </div>
+        <div class="modal-body">
+
+            <div class="form-row">
+                <label>Wiki Page Names <span class="label-hint">(one per line)</span></label>
+                <textarea id="mw-pages" rows="4" placeholder="Narendra Modi&#10;BHU Hostel&#10;Varanasi"></textarea>
+            </div>
+
+            <div class="form-row">
+                <label>Text Processing <a class="help-marker" href="docs.html#option" target="_blank">?</a></label>
+                <div class="radio-group" id="mw-option-group">
+                    <label><input type="radio" name="mw-option" value="1" checked onchange="onMwOptionChange()"> Fast <small>(OPTION 1)</small></label>
+                    <label><input type="radio" name="mw-option" value="2" onchange="onMwOptionChange()"> Efficient <small>(OPTION 2)</small></label>
+                    <label><input type="radio" name="mw-option" value="3" onchange="onMwOptionChange()"> Accurate <small>(OPTION 3)</small></label>
+                </div>
+                <div class="lock-warning hidden" id="mw-option-lock-msg"></div>
+                <div class="lock-warning hidden" id="mw-option-warn" style="background:#fff8e1;border-color:#ffe082;color:#f57f17;">
+                    &#9888; Selecting Accurate (OPTION 3) will <strong>permanently lock</strong> this category. All future documents must also use OPTION 3.
+                </div>
+            </div>
+
+            <div class="form-inline-row">
+                <div class="form-row">
+                    <label>Min Chunks <a class="help-marker" href="docs.html#chunks" target="_blank">?</a></label>
+                    <input type="number" id="mw-min-chunks" value="3" min="1" max="20">
+                </div>
+                <div class="form-row">
+                    <label>Max Chunks <a class="help-marker" href="docs.html#chunks" target="_blank">?</a></label>
+                    <input type="number" id="mw-max-chunks" value="10" min="1" max="50">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <label>Image Processing <a class="help-marker" href="docs.html#image_option" target="_blank">?</a></label>
+                <div class="radio-group" id="mw-img-group">
+                    <label><input type="radio" name="mw-img" value="0" checked onchange="onMwImgChange()"> Off</label>
+                    <label><input type="radio" name="mw-img" value="1" onchange="onMwImgChange()"> Fast (CLIP)</label>
+                    <label><input type="radio" name="mw-img" value="2" onchange="onMwImgChange()"> Accurate (LLM)</label>
+                </div>
+                <div class="lock-warning hidden" id="mw-img-lock-msg"></div>
+                <div class="lock-note hidden" id="mw-img-lock-note">
+                    <strong>Cannot change once set for the first set of documents</strong>
+                </div>
+            </div>
+
+            <div class="form-row hidden" id="mw-img-retrieve-row">
+                <label>Maximum no. of Images Retrieval Allowed <a class="help-marker" href="docs.html#image_retrieve" target="_blank">?</a></label>
+                <input type="number" id="mw-img-retrieve" value="3" min="1" max="10">
+            </div>
+
+            <div class="form-row">
+                <label>CSS Classes to Remove <a class="help-marker" href="docs.html#classes" target="_blank">?</a>
+                    <span class="label-hint">Defaults from clean_html.py — click &#10005; to remove, type to add</span>
+                </label>
+                <div class="tags-container" id="mw-remove-classes">
+                    <input type="text" class="tag-add-input" id="mw-classes-input" placeholder="add class...">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <label>Section Headings to Remove <a class="help-marker" href="docs.html#noise" target="_blank">?</a>
+                    <span class="label-hint">Sections with these substrings will be stripped</span>
+                </label>
+                <div class="tags-container" id="mw-noise-substrings">
+                    <input type="text" class="tag-add-input" id="mw-noise-input" placeholder="add substring...">
+                </div>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <button class="btn" onclick="closeModal('addmore-mw-modal')">Cancel</button>
+            <button class="btn btn-primary" onclick="submitAddMoreMW()">Process Documents</button>
+        </div>
+    </div>
+</div>
+
+<!-- ADD MORE MODAL - PDF -->
+<div class="modal-overlay" id="addmore-pdf-modal">
+    <div class="modal-box modal-lg">
+        <div class="modal-header">
+            <h3>Add Documents — <span id="addmore-pdf-catname"></span> (PDF)</h3>
+            <button class="modal-close" onclick="closeModal('addmore-pdf-modal')">&#10005;</button>
+        </div>
+        <div class="modal-body">
+
+            <div class="form-row">
+                <label>Upload PDF Files</label>
+                <input type="file" id="pdf-files" multiple accept=".pdf" style="padding:6px;">
+            </div>
+
+            <div class="form-row">
+                <label>Text Processing <a class="help-marker" href="docs.html#option" target="_blank">?</a></label>
+                <div class="radio-group" id="pdf-option-group">
+                    <label><input type="radio" name="pdf-option" value="1" checked onchange="onPdfOptionChange()"> Fast <small>(OPTION 1)</small></label>
+                    <label><input type="radio" name="pdf-option" value="2" onchange="onPdfOptionChange()"> Efficient <small>(OPTION 2)</small></label>
+                    <label><input type="radio" name="pdf-option" value="3" onchange="onPdfOptionChange()"> Accurate <small>(OPTION 3)</small></label>
+                </div>
+                <div class="lock-warning hidden" id="pdf-option-lock-msg"></div>
+                <div class="lock-warning hidden" id="pdf-option-warn" style="background:#fff8e1;border-color:#ffe082;color:#f57f17;">
+                    &#9888; Selecting Accurate (OPTION 3) will <strong>permanently lock</strong> this category.
+                </div>
+            </div>
+
+            <div class="form-inline-row">
+                <div class="form-row">
+                    <label>Min Chunks</label>
+                    <input type="number" id="pdf-min-chunks" value="3" min="1" max="20">
+                </div>
+                <div class="form-row">
+                    <label>Max Chunks</label>
+                    <input type="number" id="pdf-max-chunks" value="10" min="1" max="50">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <label>Image Processing <a class="help-marker" href="docs.html#image_option" target="_blank">?</a></label>
+                <div class="radio-group" id="pdf-img-group">
+                    <label><input type="radio" name="pdf-img" value="0" checked onchange="onPdfImgChange()"> Off</label>
+                    <label><input type="radio" name="pdf-img" value="1" onchange="onPdfImgChange()"> Fast (CLIP)</label>
+                    <label><input type="radio" name="pdf-img" value="2" onchange="onPdfImgChange()"> Accurate (LLM)</label>
+                </div>
+                <div class="lock-warning hidden" id="pdf-img-lock-msg"></div>
+            </div>
+            <div class="form-row hidden" id="pdf-img-retrieve-row">
+                <label>Retrieve top N images</label>
+                <input type="number" id="pdf-img-retrieve" value="3" min="1" max="10">
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <button class="btn" onclick="closeModal('addmore-pdf-modal')">Cancel</button>
+            <button class="btn btn-primary" onclick="submitAddMorePDF()">Process Documents</button>
+        </div>
+    </div>
+</div>
+
+<script src="js/admin.js"></script>
+</body>
+</html>
